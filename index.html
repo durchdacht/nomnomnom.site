@@ -1,79 +1,253 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomnomnom.site - Game Servers</title>
-    <link rel="stylesheet" href="style.css">
-    <script>
-        // Fügt einen dynamischen Query-Parameter zum CSS-Link hinzu
-        const styleSheet = document.querySelector('link[rel="stylesheet"]');
-        styleSheet.href = styleSheet.href + '?v=' + new Date().getTime();
-        
-        // Fügt einen dynamischen Query-Parameter zum Script-Tag hinzu
-        const scriptTag = document.querySelector('script[src="script.js"]');
-        scriptTag.src = scriptTag.src + '?v=' + new Date().getTime();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Michiru's Online Checker</title>
+  <style>
+    /* Modern Dark Theme */
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #1f1f1f;
+      --text-primary: #e0e0e0;
+      --accent: #7289DA;
+      --error: #ed4245;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--bg-secondary);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      background: linear-gradient(90deg, var(--accent), #5865F2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      display: none; /* erst sichtbar, wenn Passwort korrekt */
+    }
+
+    .checker {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .server-card {
+      background-color: var(--bg-secondary);
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: var(--transition);
+    }
+
+    .server-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .server-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .server-status {
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background-color: rgba(114, 137, 218, 0.2);
+      color: var(--accent);
+    }
+
+    .offline {
+      background-color: rgba(237, 68, 69, 0.2);
+      color: var(--error);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: var(--bg-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Passwort Overlay */
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .password-container {
+      background-color: var(--bg-secondary);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .password-container h2 {
+      margin-bottom: 15px;
+    }
+
+    .password-container input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .password-container button {
+      background-color: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .password-container button:hover {
+      background-color: #5865F2;
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 0.9rem;
+      height: 1.2em;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <h1>Nomnomnom.site</h1>
-            </div>
-            <p class="tagline">Gaming servers by <span class="owner-highlight">durchdacht</span></p>
-        </header>
+  <header>
+    <h1>Michiru's Online Checker</h1>
+  </header>
 
-        <div class="time-display">
-            <i data-feather="clock"></i>
-            <p id="current-time">2025-04-03 19:29:24</p>
-        </div>
-
-        <main>
-            <section class="server-list">
-                <h2>Game Servers</h2>
-                
-                <!-- Server Cards (Hier kannst du mehr hinzufügen) -->
-                <div class="server-card">
-                    <div class="server-icon">
-                        <i data-feather="box"></i>
-                    </div>
-                    <div class="server-info">
-                        <h3>Minecraft Survival</h3>
-                        <p class="server-description">Vanilla survival experience with a friendly community</p>
-                        <div class="server-meta">
-                            <span class="server-owner">Hosted by durchdacht</span>
-                        </div>
-                    </div>
-                    <div class="server-status online">
-                        <span class="status-dot"></span>
-                        ONLINE
-                    </div>
-                    <button class="connect-button" data-server="minecraft">
-                        <i data-feather="log-in"></i>
-                        Connect
-                    </button>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 Nomnomnom.site | <span id="current-user">durchdacht</span></p>
-            <div class="footer-links">
-                <a href="#" class="footer-link">
-                    <i data-feather="mail"></i>
-                </a>
-                <a href="#" class="footer-link">
-                    <i data-feather="github"></i>
-                </a>
-                <a href="#" class="footer-link">
-                    <i data-feather="twitter"></i>
-                </a>
-            </div>
-        </footer>
+  <!-- Passwort-Overlay -->
+  <div class="password-overlay" id="password-overlay">
+    <div class="password-container">
+      <h2>Passwort eingeben</h2>
+      <input type="password" id="password-input" placeholder="Passwort">
+      <button id="submit-password">Einloggen</button>
+      <p class="error-message" id="error-message"></p>
     </div>
+  </div>
 
-    <script src="script.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
+  <main id="main-content">
+    <section class="checker">
+      <!-- Beispiel-Serverkarten -->
+      <div class="server-card">
+        <span class="server-name">Minecraft Survival</span>
+        <span class="server-status" id="status-mc">Prüfe...</span>
+      </div>
+      <div class="server-card">
+        <span class="server-name">Rust Server</span>
+        <span class="server-status" id="status-rust">Prüfe...</span>
+      </div>
+      <div class="server-card">
+        <span class="server-name">Counter-Strike 2</span>
+        <span class="server-status offline" id="status-cs2">Prüfe...</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Michiru's Site
+  </footer>
+
+  <script>
+    // Passwort-Funktionalität
+    const passwordOverlay = document.getElementById('password-overlay');
+    const passwordInput = document.getElementById('password-input');
+    const submitButton = document.getElementById('submit-password');
+    const errorMessage = document.getElementById('error-message');
+    const mainContent = document.getElementById('main-content');
+
+    // Passwort (in Klartext, da statisch)
+    const CORRECT_PASSWORD = "michir";
+
+    submitButton.addEventListener('click', function() {
+      const entered = passwordInput.value.trim();
+      if (entered === CORRECT_PASSWORD) {
+        passwordOverlay.style.display = 'none';
+        mainContent.style.display = 'block';
+        checkServerStatus();  // Serverstatus prüfen, wenn eingeloggt
+      } else {
+        errorMessage.textContent = "Falsches Passwort!";
+        passwordInput.value = "";
+      }
+    });
+
+    passwordInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        submitButton.click();
+      }
+    });
+
+    // Simulierter Online Checker
+    function checkServerStatus() {
+      // Dummy-Daten: In einem echten Szenario würdest du hier per Fetch/AJAX einen API-Call machen
+      const servers = {
+        "status-mc": Math.random() > 0.3 ? "ONLINE" : "OFFLINE",
+        "status-rust": Math.random() > 0.3 ? "ONLINE" : "OFFLINE",
+        "status-cs2": Math.random() > 0.3 ? "ONLINE" : "OFFLINE"
+      };
+
+      for (const id in servers) {
+        const elem = document.getElementById(id);
+        if (elem) {
+          elem.textContent = servers[id];
+          if (servers[id] === "ONLINE") {
+            elem.classList.remove('offline');
+            elem.style.backgroundColor = "rgba(114, 137, 218, 0.2)";
+            elem.style.color = "var(--accent)";
+          } else {
+            elem.classList.add('offline');
+            elem.style.backgroundColor = "rgba(237, 68, 69, 0.2)";
+            elem.style.color = "var(--error)";
+          }
+        }
+      }
+    }
+  </script>
 </body>
 </html>
