@@ -9,6 +9,7 @@
     --accent-secondary: #5865F2;
     --online: #43b581;
     --offline: #f04747;
+    --error: #ed4245;
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -46,6 +47,113 @@ body {
     z-index: 0;
 }
 
+/* Password overlay styles */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.password-container {
+    background-color: var(--bg-secondary);
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.password-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.password-form {
+    margin: 25px 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(114, 137, 218, 0.3);
+}
+
+.submit-button {
+    background-color: var(--accent-primary);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto;
+}
+
+.submit-button:hover {
+    background-color: var(--accent-secondary);
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: var(--error);
+    margin-top: 15px;
+    font-size: 0.9rem;
+    height: 20px;
+}
+
+.owner-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+.owner-highlight {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
 /* Header styles */
 header {
     text-align: center;
@@ -72,18 +180,13 @@ h1 {
     color: var(--text-secondary);
 }
 
-.owner-highlight {
-    color: var(--accent-primary);
-    font-weight: 600;
-}
-
 /* Time display styles */
 .time-display {
     background-color: var(--bg-tertiary);
     padding: 15px 20px;
     text-align: center;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin: 20px 0;
     box-shadow: var(--card-shadow);
     display: flex;
     align-items: center;
@@ -106,11 +209,16 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
 h2 {
     font-size: 2rem;
-    margin-bottom: 30px;
     color: var(--text-primary);
-    text-align: center;
     position: relative;
 }
 
@@ -120,7 +228,25 @@ h2:after {
     width: 50px;
     height: 3px;
     background: var(--accent-primary);
-    margin: 10px auto;
+    margin-top: 10px;
+}
+
+.lock-button {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.lock-button:hover {
+    background-color: var(--accent-primary);
+    color: white;
 }
 
 /* Server card styles */
@@ -303,5 +429,10 @@ footer {
     
     h1 {
         font-size: 2.5rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
     }
 }
