@@ -3,15 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomnomnom.site - Game Servers</title>
+    <title>Nomnomnom.site</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="particles-container" id="particles-js"></div>
+    
+    <!-- Password Screen -->
+    <div class="password-overlay" id="password-overlay">
+        <div class="password-container">
+            <h1>Nomnomnom.site</h1>
+            <p class="tagline">Server access</p>
+            
+            <div class="time-display">
+                <i data-feather="clock"></i>
+                <p id="login-time">2025-04-03 19:33:39</p>
+            </div>
+            
+            <div class="password-form">
+                <div class="form-group">
+                    <input type="password" id="password-input" placeholder="Enter password">
+                </div>
+                <button id="submit-password" class="submit-button">
+                    <i data-feather="unlock"></i>
+                    Access Servers
+                </button>
+                <p class="error-message" id="error-message"></p>
+            </div>
+            
+            <p class="owner-info">Managed by <span class="owner-highlight">durchdacht</span></p>
+        </div>
+    </div>
+
+    <!-- Main Content (initially hidden) -->
+    <div class="container" id="main-content" style="display: none;">
         <header>
             <div class="logo">
                 <h1>Nomnomnom.site</h1>
@@ -21,12 +51,18 @@
 
         <div class="time-display">
             <i data-feather="clock"></i>
-            <p id="current-time">2025-04-03 19:29:24</p>
+            <p id="current-time">2025-04-03 19:33:39</p>
         </div>
 
         <main>
             <section class="server-list">
-                <h2>Game Servers</h2>
+                <div class="section-header">
+                    <h2>Game Servers</h2>
+                    <button id="lock-button" class="lock-button">
+                        <i data-feather="lock"></i>
+                        Lock
+                    </button>
+                </div>
                 
                 <div class="server-card">
                     <div class="server-icon">
@@ -90,8 +126,6 @@
                         Connect
                     </button>
                 </div>
-
-                <!-- Add more server cards following the same structure -->
             </section>
         </main>
 
@@ -110,8 +144,6 @@
             </div>
         </footer>
     </div>
-
-    <div class="particles-container" id="particles-js"></div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
