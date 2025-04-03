@@ -3,19 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NomNomNom</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Nomnomnom.site - Game Servers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to NomNomNom</h1>
-    </header>
-    <main>
-        <p>This is a basic dark theme website.</p>
-        <p>Enjoy your stay!</p>
-    </main>
-    <footer>
-        <p>&copy; 2025 NomNomNom. All rights reserved.</p>
-    </footer>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Nomnomnom.site</h1>
+            </div>
+            <p class="tagline">Gaming servers by <span class="owner-highlight">durchdacht</span></p>
+        </header>
+
+        <div class="time-display">
+            <i data-feather="clock"></i>
+            <p id="current-time">2025-04-03 19:29:24</p>
+        </div>
+
+        <main>
+            <section class="server-list">
+                <h2>Game Servers</h2>
+                
+                <div class="server-card">
+                    <div class="server-icon">
+                        <i data-feather="box"></i>
+                    </div>
+                    <div class="server-info">
+                        <h3>Minecraft Survival</h3>
+                        <p class="server-description">Vanilla survival experience with a friendly community</p>
+                        <div class="server-meta">
+                            <span class="server-owner">Hosted by durchdacht</span>
+                        </div>
+                    </div>
+                    <div class="server-status online">
+                        <span class="status-dot"></span>
+                        ONLINE
+                    </div>
+                    <button class="connect-button" data-server="minecraft">
+                        <i data-feather="log-in"></i>
+                        Connect
+                    </button>
+                </div>
+
+                <div class="server-card">
+                    <div class="server-icon">
+                        <i data-feather="shield"></i>
+                    </div>
+                    <div class="server-info">
+                        <h3>Rust Server</h3>
+                        <p class="server-description">Weekly wipe | PVP | 3x Resources</p>
+                        <div class="server-meta">
+                            <span class="server-owner">Hosted by durchdacht</span>
+                        </div>
+                    </div>
+                    <div class="server-status online">
+                        <span class="status-dot"></span>
+                        ONLINE
+                    </div>
+                    <button class="connect-button" data-server="rust">
+                        <i data-feather="log-in"></i>
+                        Connect
+                    </button>
+                </div>
+
+                <div class="server-card">
+                    <div class="server-icon">
+                        <i data-feather="crosshair"></i>
+                    </div>
+                    <div class="server-info">
+                        <h3>Counter-Strike 2</h3>
+                        <p class="server-description">Community server | Casual play | All maps</p>
+                        <div class="server-meta">
+                            <span class="server-owner">Hosted by durchdacht</span>
+                        </div>
+                    </div>
+                    <div class="server-status offline">
+                        <span class="status-dot"></span>
+                        OFFLINE
+                    </div>
+                    <button class="connect-button disabled" data-server="cs2">
+                        <i data-feather="log-in"></i>
+                        Connect
+                    </button>
+                </div>
+
+                <!-- Add more server cards following the same structure -->
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Nomnomnom.site | <span id="current-user">durchdacht</span></p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">
+                    <i data-feather="mail"></i>
+                </a>
+                <a href="#" class="footer-link">
+                    <i data-feather="github"></i>
+                </a>
+                <a href="#" class="footer-link">
+                    <i data-feather="twitter"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <div class="particles-container" id="particles-js"></div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
